@@ -2,6 +2,7 @@
 import pandas as pandas
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import stats
 
 
 e=pandas.read_excel('PYTHON DATEN.xlsx', sheet_name='Bonitur')
@@ -71,9 +72,11 @@ def e_probe (sorte,protein):
                 i -=1   
                 if e[i,:][0] in Gruppen[sorte + q]:
                     Kontrolle.append(e[i,pro])
+                    
+    # Kontrollschritt zur ausgabe der mittelwerte
+    # c,b,a=np.mean(Kontrolle),np.mean(Mittel),np.mean(Hohe)
+    # print( sorte,' \n', b-c,a-c)
 
-    c,b,a=np.mean(Kontrolle),np.mean(Mittel),np.mean(Hohe)
-    print( sorte,' \n', b-c,a-c)
     return  Kontrolle, Mittel, Hohe    
     
 
@@ -89,6 +92,10 @@ def plot_gene(Test,Y_label):
    #     print(e_probe(i,Test))
         colors = ['#e8e6e3', '#f5e20a', '#f50a0a']
  
+        # Turkey Test zur überprüfung der statistischen Abundanz
+        print(i,stats.ttest_ind(e_probe(i,Test)[1], e_probe(i,Test)[0], equal_var=True)) 
+        print(stats.ttest_ind(e_probe(i,Test)[2], e_probe(i,Test)[0], equal_var=True)) 
+
         for patch, color in zip(bp['boxes'], colors):
             patch.set_facecolor(color)
 

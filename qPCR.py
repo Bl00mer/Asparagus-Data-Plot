@@ -4,7 +4,7 @@
 import pandas as pandas
 import numpy as np
 import matplotlib.pyplot as plt
-
+from scipy import stats
 
 # Import der Versuchsdaten als in Form von verschiedenen Datensätzen
 a=pandas.read_excel('PYTHON DATEN.xlsx', sheet_name='ac-Alle-LITERATUR_PRIMER') # liefert die erste Tabelle
@@ -124,7 +124,12 @@ def plot_gen (Gen,data):
         ax.grid(axis='y',alpha = 0.3)            
 
         #t.test zum prüfen der signifikants
-        #print(stats.ttest_ind(a=Kontrolle, b=Mittel, equal_var=True)) 
+        if len(Variante) ==2:
+            print(i,stats.ttest_ind(probe(i,Gen,data)[1], probe(i,Gen,data)[0], equal_var=True)) 
+
+        else:
+            print(i,stats.ttest_ind(probe(i,Gen,data)[1], probe(i,Gen,data)[0], equal_var=True)) 
+            print(stats.ttest_ind(probe(i,Gen,data)[2], probe(i,Gen,data)[0], equal_var=True)) 
 
         
         # Im Grunde sind alle folgenden Zeilen bis zum Ende der for-Schleife nur kosmetischer Natur, wie dem entfernen von 
@@ -192,11 +197,11 @@ Variante = ['a','c']
 # durch das entfernen des '#' zeichens lassen sich die Ergebnisse plotten
 
 # plot_gen('DCqPR1',a)
-# plot_gen('DCqPAL',a)
-# plot_gen('DCqPOX',a)
-# plot_gen('DCqAOS',a)
-# plot_gen('DCqERF1',a)
-# plot_gen('DCqAOC',a)
+plot_gen('DCqPAL',a)
+plot_gen('DCqPOX',a)
+plot_gen('DCqAOS',a)
+plot_gen('DCqERF1',a)
+plot_gen('DCqAOC',a)
 
 
 b = np.array(b)
