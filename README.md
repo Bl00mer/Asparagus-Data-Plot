@@ -9,3 +9,5 @@ qPCR;
 5,7,12dpi Verglich Wurzel-Sprossanzahl;
 5dpi wurzellänge, frischegewicht spross und wurzel;
 Jährliche Produktion
+
+Verfasser: H.M.Blum (25.8.2022) 
